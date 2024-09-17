@@ -1,14 +1,30 @@
-return {
-  "nvim-treesitter/nvim-treesitter",
-  build = ":TSUpdate",
-  config = function()
-    local configs = require("nvim-treesitter.configs")
-
-      configs.setup({
-        ensure_installed = { "c", "lua", "javascript", "html", "css", "json", "php", "typescript" },
-        auto_install = true,
-        highlight = { enable = ture },
-        indent = { enable = ture },
-      })
-  end
+-- Treesitter is used for creating syntax highlighting for different languages
+local M = {
+	"nvim-treesitter/nvim-treesitter",
+	event = { "BufReadPost", "BufNewFile" },
+	build = ":TSUpdate",
 }
+
+function M.config()
+	require("nvim-treesitter.configs").setup({
+		ensure_installed = {
+			"bash",
+			"c",
+			"css",
+			"html",
+			"javascript",
+			"json",
+			"lua",
+			"markdown",
+			"markdown_inline",
+			"php",
+			"python",
+			"typescript",
+		},
+		auto_install = true,
+		highlight = { enable = true },
+		indent = { enable = true },
+	})
+end
+
+return M
